@@ -1,0 +1,30 @@
+name: 'Node Releasr'
+description: 'Github Action that allows you to commit local changes & tag Node repositories'
+inputs:
+  version_metadata_path:
+    description: 'Path to file containing Version string'
+    required: true
+    default: 'package.json'
+  author_name:
+    description: 'Commit Author'
+    required: true
+    default: 'packagrio-bot'
+  author_email:
+    description: 'Commit Author Email'
+    required: true
+    default: 'packagr-io[bot]@users.noreply.github.com'
+  cwd:
+    description: 'Working Directory'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    PACKAGR_VERSION_METADATA_PATH: ${{ inputs.version_metadata_path }}
+    PACKAGR_ENGINE_GIT_AUTHOR_NAME: ${{ inputs.author_name }}
+    PACKAGR_ENGINE_GIT_AUTHOR_EMAIL: ${{ inputs.author_email }}
+    CUSTOM_WORKING_DIRECTORY: ${{ inputs.cwd }}
+branding:
+  icon: 'tag'
+  color: 'blue'
